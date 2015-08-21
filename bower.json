@@ -1,0 +1,20 @@
+{
+  "name": "inertia",
+  "main": "index.html",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.2",
+    "easeljs": "~0.8.0",
+    "PreloadJS": "~0.6.0",
+    "seiyria-bootstrap-slider": "4.5.1",
+    "bootstrap-vertical-tabs": "~1.2.1",
+    "justgage-official": "*"
+  }
+}

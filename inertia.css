@@ -1,0 +1,89 @@
+/* inertia.css */
+
+body {
+  background: black;
+  color: white;
+}
+
+canvas {
+  background: black;
+  display: block;
+  margin-bottom: 20px;
+}
+
+header {
+	background: rgb(0, 74, 128) url(assets/images/header-background.jpg) no-repeat center top;
+  box-shadow: 0 0 10px black;
+  height: 100px;
+  margin-bottom: 40px;
+}
+
+header h1 {
+	display: none;
+}
+
+.container-fluid {
+  margin-right: 15px;
+}
+
+#controls .panel-body {
+  height: 100px;
+}
+
+.panel-body {
+  color: black;
+  padding: 10px;
+}
+
+.nav > li > a {
+  color: gray; 
+}
+
+.nav > li.active > a {
+  color: black; 
+}
+
+.nav > li > a:hover {
+  background: transparent;
+  color: white;
+}
+
+.panel-body p {
+  margin: 5px;
+}
+
+.result {
+  font-size: 28px;
+  font-weight: 300;
+}
+
+#massSliderInstance {
+  width: 90%;
+}
+
+#mass {
+  font-size: 32px;
+  margin: 0;
+}
+
+#rocket {
+  margin-top: 10px;
+}
+
+#velocity {
+  font-size: 32px;
+  margin: 0;
+}
+
+.no-selection {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -ms-user-select: none;
+}
+
+#gauge {
+  position: absolute;
+  width: 150px;
+  height: 120px;
+}

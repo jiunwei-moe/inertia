@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spaceship Simulator</title>
+
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="bower_components/seiyria-bootstrap-slider/dist/css/bootstrap-slider.css">
+    <link rel="stylesheet" href="bower_components/bootstrap-vertical-tabs/bootstrap.vertical-tabs.css">
+    <link href="inertia.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+
+    <div class="container no-selection">
+
+      <nav class="navbar navbar-inverse">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">
+            Spaceship Simulator
+          </a>
+        </div>
+      </nav>
+
+      <div class="row">
+
+        <div id="content" class="col-md-12">
+
+          <p><canvas id="canvas" width="1140" height="400"></canvas></p>
+
+          <div id="controls" class="row hidden">
+
+            <div class="col-md-3">
+              <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Control</h3>
+                </div>
+                <div class="panel-body">
+                  <div class="btn-group" role="group" aria-label="control">
+                    <button id="reset" type="button" class="btn btn-md btn-danger"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Reset Simulation</button>
+                    <!--<button id="zoomOut" type="button" class="btn btn-md btn-default" data-toggle="tooltip" data-placement="top" title="Zoom Out"><span class="glyphicon glyphicon-zoom-out" aria-hidden="true"></span></button>
+                    <button id="zoomIn" type="button" class="btn btn-md btn-default" data-toggle="tooltip" data-placement="top" title="Zoom In"><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></button>-->
+                  </div><!--/.btn-group-->
+                </div><!--/.panel-body-->
+              </div><!--/.panel-->
+            </div><!--/.col-sx-3-->
+
+            <div class="col-md-3">
+              <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><span class="glyphicon glyphicon-scale" aria-hidden="true"></span> Mass</h3>
+                </div>
+                <div class="panel-body">
+                    <p id="mass"><span id="massValue">100</span> kg</p>
+                    <p><input id="massSlider" type="text"></p>
+                </div><!--/.panel-body-->
+              </div><!--/.panel-->
+            </div><!--/.col-md-3-->
+
+            <div class="col-md-3">
+              <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><span class="glyphicon glyphicon-fire" aria-hidden="true"></span> Rockets</h3>
+                </div>
+                <div class="panel-body">
+                  <p id="rocket">Used <span id="rocketTimes">0</span> times</p>
+                </div><!--/.panel-body-->
+              </div><!--/.panel-->
+            </div><!--/.col-md-3-->
+
+            <div class="col-md-3">
+              
+            </div><!--/.col-md-3-->
+            
+          </div><!--/.row-->
+
+          <div class="row">
+
+            <div class="col-xs-3">
+              <ul class="nav nav-tabs tabs-left" role="tablist" id="missionTabs">
+                <li role="presentation" class="active"><a href="#missionOne" aria-controls="missionOne" role="tab" data-toggle="tab">Mission 1: Escape the Bomb</a></li>
+                <li role="presentation"><a href="#missionTwo" aria-controls="missionTwo" role="tab" data-toggle="tab">Mission 2: Stop the Spaceship</a></li>
+              </ul><!--/.nav-tabs-->
+            </div>
+
+            <div class="col-xs-9">
+
+              <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="missionOne">
+
+                  <p>How many times do you need to use the rockets to outrun a bomb travelling at 3 m/s when...</p>
+
+                  <div class="row text-center">
+                    <div class="col-md-4">
+                      <div class="panel panel-default">
+                        <div class="panel-body">
+                          <p>...the spaceship is 50 kg?</p>
+                          <p class="result"><span id="missionOne50kgResult">No Result Yet</span></p>
+                          <p><button id="missionOne50kg" type="button" class="btn btn-md btn-success"><span class="glyphicon glyphicon-play" aria-hidden="true"></span> Start Mission</button></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="panel panel-default">
+                        <div class="panel-body">
+                          <p>...the spaceship is 250 kg?</p>
+                          <p class="result"><span id="missionOne250kgResult">No Result Yet</span></p>
+                          <p><button id="missionOne250kg" type="button" class="btn btn-md btn-success"><span class="glyphicon glyphicon-play" aria-hidden="true"></span> Start Mission</button></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="panel panel-default">
+                        <div class="panel-body">
+                          <p>...the spaceship is 400 kg?</p>
+                          <p class="result"><span id="missionOne400kgResult">No Result Yet</span></p>
+                          <p><button id="missionOne400kg" type="button" class="btn btn-md btn-success"><span class="glyphicon glyphicon-play" aria-hidden="true"></span> Start Mission</button></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div><!--/.tab-pane-->
+                <div role="tabpanel" class="tab-pane" id="missionTwo">
+
+                  <p>How many times do you need to use the rockets to stop a spaceship travelling at 4 m/s when...</p>
+
+                  <div class="row text-center">
+                    <div class="col-md-4">
+                      <div class="panel panel-default">
+                        <div class="panel-body">
+                          <p>...the spaceship is 50 kg?</p>
+                          <p class="result"><span id="missionTwo50kgResult">No Result Yet</span></p>
+                          <p><button id="missionTwo50kg" type="button" class="btn btn-md btn-success"><span class="glyphicon glyphicon-play" aria-hidden="true"></span> Start Mission</button></p>
+                          
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="panel panel-default">
+                        <div class="panel-body">
+                          <p>...the spaceship is 250 kg?</p>
+                          <p class="result"><span id="missionTwo250kgResult">No Result Yet</span></p>
+                          <p><button id="missionTwo250kg" type="button" class="btn btn-md btn-success"><span class="glyphicon glyphicon-play" aria-hidden="true"></span> Start Mission</button></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="panel panel-default">
+                        <div class="panel-body">
+                          <p>...the spaceship is 500 kg?</p>
+                          <p class="result"><span id="missionTwo500kgResult">No Result Yet</span></p>
+                          <p><button id="missionTwo500kg" type="button" class="btn btn-md btn-success"><span class="glyphicon glyphicon-play" aria-hidden="true"></span> Start Mission</button></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div><!--/.tab-pane-->
+              </div><!--/.tab-content-->
+
+              <form class="form-horizontal">
+                <div class="form-group">
+                  <label for="rockets" class="col-sm-5 control-label"><span class="glyphicon glyphicon-fire" aria-hidden="true"></span> Rockets</label>
+                  <div class="col-sm-7">
+                    <div class="btn-group" role="group" aria-label="rockets">
+                      <button id="left" type="button" class="btn btn-md btn-default"><img src="assets/images/rocket-left-on.png" width="70" alt="Left Rocket"></button><button id="right" type="button" class="btn btn-md btn-default"><img src="assets/images/rocket-right-on.png" width="70" alt="Right Rocket"></button>
+                    </div><!--/.btn-group-->
+                  </div>
+                </div>
+              </form>
+
+            </div>
+
+          </div><!--/.row-->
+
+        </div><!--/.col-md-11-->
+
+      </div><!--/.row-->
+
+      <div id="gauge"></div>
+
+    </div><!--/.container-fluid-->
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+    <script src="bower_components/easeljs/lib/easeljs-0.8.0.combined.js"></script>
+    <script src="bower_components/PreloadJS/lib/preloadjs-0.6.0.combined.js"></script>
+    <script src="bower_components/raphael/raphael.js"></script>
+    <script src="bower_components/justgage-official/justgage.js"></script>
+    <script src="inertia.js"></script>
+  </body>
+</html>
