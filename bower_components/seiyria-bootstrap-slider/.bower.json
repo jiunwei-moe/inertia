@@ -35,7 +35,7 @@
     "tag": "v4.5.1",
     "commit": "d21e5e98be6517eb355e6ead9c0a238d41bb52a5"
   },
-  "_source": "git://github.com/seiyria/bootstrap-slider.git",
+  "_source": "https://github.com/seiyria/bootstrap-slider.git",
   "_target": "4.5.1",
   "_originalSource": "seiyria-bootstrap-slider"
 }

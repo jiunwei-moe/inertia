@@ -1,26 +1,25 @@
-Bootstrap Vertical Tabs
+Bootstrap Vertical Tabs ![bower version](http://img.shields.io/bower/v/bootstrap-vertical-tabs.svg)
 =======================
 
-Vertical tabs component for Bootstrap 3. Works with 3.0.0+ to 3.3.0.
+Vertical tabs component for Bootstrap 3.
 
 ![screenshot](screenshot.png)
 
 ### Install
-* Via bower (recommended):  
-```bash  
-  bower install bootstrap-vertical-tabs
+* Via npm:
+```bash
+ $ npm i -S bootstrap-vertical-tabs
 ```
-* Or you can just clone, [download (v1.1.1)](https://github.com/dbtek/bootstrap-vertical-tabs/archive/1.1.1.zip) from GitHub.
+* Via bower (recommended):
+```bash
+ $ bower install bootstrap-vertical-tabs
+```
+* Or you can just clone, [download (v1.2.2)](https://github.com/dbtek/bootstrap-vertical-tabs/archive/1.2.2.zip) from GitHub.
 
 ### Usage
 
 * [Get](https://github.com/dbtek/bootstrap-vertical-tabs#install) the package.
-* Include in your html.
-
-```html
-<link rel="stylesheet" href="bootstrap.vertical-tabs.css">
-```
-
+* Include css in your html. / Load with webpack or css processors.
 * Use it.
 
 #### Left Tabs
@@ -43,7 +42,7 @@ Vertical tabs component for Bootstrap 3. Works with 3.0.0+ to 3.3.0.
       <div class="tab-pane" id="messages">Messages Tab.</div>
       <div class="tab-pane" id="settings">Settings Tab.</div>
     </div>
-</div>  
+</div>
 ```
 
 #### Right Tabs
@@ -87,6 +86,3 @@ Further, take a look at included demo!
 
 ### Author
 Ismail Demirbilek, [@dbtek](http://twitter.com/dbtek).
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/dbtek/bootstrap-vertical-tabs/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
