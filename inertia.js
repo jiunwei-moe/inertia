@@ -53,17 +53,14 @@
   gaugePosition.top += Constants.MARGIN;
   $('#gauge').css(gaugePosition);
 
-  // Start preloading.
-  var manifest = [
-    { id: 'left-off', src: 'rocket-left-off.png' },
-    { id: 'left-on', src: 'rocket-left-on.png' },
-    { id: 'right-off', src: 'rocket-right-off.png' },
-    { id: 'right-on', src: 'rocket-right-on.png' },
-    { id: 'boom', src: 'boom.png' }
-  ];
-  var queue = new createjs.LoadQueue(true, 'assets/images/');
-  queue.on('complete', handleComplete, this);
-  queue.loadManifest(manifest);
+  queue = {
+    'left-off': $('#left-off')[0],
+    'left-on': $('#left-on')[0],
+    'right-off': $('#right-off')[0],
+    'right-on': $('#right-on')[0],
+    'boom': $('#boom')[0],
+  };
+  $(window).on('load', handleComplete);
 
   // Used as mission callback.
   var callback = null;
@@ -92,8 +89,8 @@
     ship.rocketTimes = 0;
     $('#rocketTimes').html(ship.rocketTimes);
 
-    left.image = queue.getResult('left-off');
-    right.image = queue.getResult('right-off');
+    left.image = queue['left-off'];
+    right.image = queue['right-off'];
 
     bomb.x = Constants.MARGIN;
     bomb.y = canvas.height / 2;
@@ -148,12 +145,12 @@
 
     ship = new createjs.Container();
 
-    left = new createjs.Bitmap(queue.getResult('left-off'));
+    left = new createjs.Bitmap(queue['left-off']);
     left.x = -left.image.width;
     left.y = -left.image.height / 2;
     ship.addChild(left);
 
-    right = new createjs.Bitmap(queue.getResult('right-off'));
+    right = new createjs.Bitmap(queue['right-off']);
     right.x = 0;
     right.y = -right.image.height / 2;
     ship.addChild(right);
@@ -195,7 +192,7 @@
     stage.addChild(bomb);
     simulationObjects.push(bomb);
 
-    boom = new createjs.Bitmap(queue.getResult('boom'));
+    boom = new createjs.Bitmap(queue['boom']);
     boom.regX = boom.image.width / 2;
     boom.regY = boom.image.height / 2;
     boom.x = canvas.width / 2;
@@ -217,7 +214,7 @@
 
     // Set up event handlers.
     $('#left').on('click', function() {
-      left.image = queue.getResult('left-on');
+      left.image = queue['left-on'];
       if (Constants.FORCE_TIME > 0) {
         $('#left').prop('disabled', true);
         $('#right').prop('disabled', true);
@@ -226,14 +223,14 @@
       } else {
         ship.velocity[0] += Constants.FORCE / ship.mass;
         setTimeout(function() {
-          left.image = queue.getResult('left-off');
+          left.image = queue['left-off'];
         }, 100);
       }
       $('#rocketTimes').html(++ship.rocketTimes);
     });
 
     $('#right').on('click', function() {
-      right.image = queue.getResult('right-on');
+      right.image = queue['right-on'];
       if (Constants.FORCE_TIME > 0) {
         $('#left').prop('disabled', true);
         $('#right').prop('disabled', true);
@@ -242,7 +239,7 @@
       } else {
         ship.velocity[0] -= Constants.FORCE / ship.mass;
         setTimeout(function() {
-          right.image = queue.getResult('right-off');
+          right.image = queue['right-off'];
         }, 100);
       }
       $('#rocketTimes').html(++ship.rocketTimes);
@@ -403,8 +400,8 @@
             if (Math.abs(obj.velocity[0]) < Constants.EPSILON) obj.velocity[0] = 0;
 
             if (obj == ship) {
-              left.image = queue.getResult('left-off');
-              right.image = queue.getResult('right-off');
+              left.image = queue['left-off'];
+              right.image = queue['right-off'];
               $('#left').prop('disabled', false);
               $('#right').prop('disabled', false);
             }

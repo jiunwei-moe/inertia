@@ -31,7 +31,16 @@
         </div>
       </nav>
 
-      <div class="row">
+      <div class="panel panel-default hidden-lg">
+        <div class="panel-body">
+          <p>This simulator requires a width of at least 1170 pixels.</p>
+          <p><div class="btn-group">
+              <a href="index.html" target="_blank" class="btn btn-primary">Open in a new tab</a>
+          </div></p>
+        </div>
+      </div>
+
+      <div class="row visible-lg-block">
 
         <div id="content" class="col-md-12">
 
@@ -191,12 +200,19 @@
 
     </div><!--/.container-fluid-->
 
+    <div id="preload" style="display: none">
+      <img id="left-off" src="assets/images/rocket-left-off.png" alt="left-off">
+      <img id="left-on" src="assets/images/rocket-left-on.png" alt="left-on">
+      <img id="right-off" src="assets/images/rocket-right-off.png" alt="right-off">
+      <img id="right-on" src="assets/images/rocket-right-on.png" alt="right-off">
+      <img id="boom" src="assets/images/boom.png" alt="boom">
+    </div>
+
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
-    <script src="bower_components/easeljs/lib/easeljs-0.8.0.combined.js"></script>
-    <script src="bower_components/PreloadJS/lib/preloadjs-0.6.0.combined.js"></script>
+    <script src="bower_components/easeljs/lib/easeljs-0.8.2.combined.js"></script>
     <script src="bower_components/raphael/raphael.js"></script>
     <script src="bower_components/justgage-official/justgage.js"></script>
     <script src="inertia.js"></script>
