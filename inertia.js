@@ -48,10 +48,7 @@
     labelFontColor: 'silver',
     decimals: 1
   });
-  var gaugePosition = $('#canvas').offset();
-  gaugePosition.left += canvas.width - Constants.MARGIN - $('#gauge').width();
-  gaugePosition.top += Constants.MARGIN;
-  $('#gauge').css(gaugePosition);
+  $(window).on('resize', positionGauge);
 
   queue = {
     'left-off': $('#left-off')[0],
@@ -75,6 +72,13 @@
   var bomb_label;
   var boom;
   var simulationObjects = [];
+
+  function positionGauge() {
+    var gaugePosition = $('#canvas').offset();
+    gaugePosition.left += canvas.width - Constants.MARGIN - $('#gauge').width();
+    gaugePosition.top += Constants.MARGIN;
+    $('#gauge').css(gaugePosition);
+  }
 
   function reset() {
     ship.x = canvas.width / 2;
@@ -435,6 +439,7 @@
     }
 
     stage.update();
+    positionGauge();
   }
 
 })();
