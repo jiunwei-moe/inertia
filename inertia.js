@@ -16,13 +16,18 @@
     MAX_R: 60, // in pixels
     EPSILON: 0.005,
     SCALE_FACTOR: 0.75,
-    MARGIN: 20
+    MARGIN: 20,
+    START_WIDTH: 1140,
+    START_HEIGHT: 300,
+    GAUGE_WIDTH: 150,
+    GAUGE_HEIGHT: 120
   };
 
   // Global variables.
   var canvas = document.getElementById('canvas');
   var stage = new createjs.Stage('canvas');
   var scale = 1;
+  var gauge = document.getElementById('gauge');
 
   // Set up sliders.
   var massSlider = $('#massSlider').slider({
@@ -46,12 +51,15 @@
     title: 'Spaceship Speed',
     label: 'm/s',
     labelFontColor: 'silver',
-    decimals: 1
+    decimals: 1,
+    relativeGaugeSize: true,
+    valueMinFontSize: 24,
+    labelMinFontSize: 16,
+    minLabelMinFontSize: 12,
+    maxLabelMinFontSize: 12,
   });
-  var gaugePosition = $('#canvas').offset();
-  gaugePosition.left += canvas.width - Constants.MARGIN - $('#gauge').width();
-  gaugePosition.top += Constants.MARGIN;
-  $('#gauge').css(gaugePosition);
+  handleResize();
+  $(window).on('resize', handleResize);
 
   queue = {
     'left-off': $('#left-off')[0],
@@ -75,6 +83,27 @@
   var bomb_label;
   var boom;
   var simulationObjects = [];
+
+  function handleResize() {
+    var max_width = $('#content').width();
+    if (max_width >= Constants.START_WIDTH) {
+      scale = 1;
+      $(canvas).width(Constants.START_WIDTH);
+      $(canvas).height(Constants.START_HEIGHT);
+    } else {
+      scale = max_width / Constants.START_WIDTH;
+      $(canvas).width(max_width);
+      $(canvas).height(scale * Constants.START_HEIGHT);
+    }
+
+    $(gauge).width(scale * Constants.GAUGE_WIDTH);
+    $(gauge).height(scale * Constants.GAUGE_HEIGHT);
+
+    var gaugePosition = $(canvas).offset();
+    gaugePosition.left += $(canvas).width() - $(gauge).width();
+    gaugePosition.top += 0;
+    $(gauge).css(gaugePosition);
+  }
 
   function reset() {
     ship.x = canvas.width / 2;
@@ -378,9 +407,9 @@
   }
 
   function handleTick(event) {
-    stage.scaleX = stage.scaleY = scale;
-    stage.x = (canvas.width / 2) * (1 - scale);
-    stage.y = (canvas.height / 2) * (1 - scale);
+    // stage.scaleX = stage.scaleY = scale;
+    // stage.x = -(canvas.width / 2) * (1 - scale);
+    // stage.y = -(canvas.height / 2) * (1 - scale);
 
     if (!event.paused) {
       if (callback) callback();
